@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.google.common.primitives.UnsignedBytes;
 
 public class Buffer {
 	private int numIO;
@@ -15,6 +14,25 @@ public class Buffer {
 	private int numallblock;
 	private int numfreeblk;
 	private Block[] data;
+	
+	public int getNumIO() {
+		return numIO;
+	}
+	public int getBufsize() {
+		return bufsize;
+	}
+	public int getBlksize() {
+		return blksize;
+	}
+	public int getNumallblock() {
+		return numallblock;
+	}
+	public int getNumfreeblk() {
+		return numfreeblk;
+	}
+	public Block[] getData() {
+		return data;
+	}
 	public Buffer(int bufsize,int blksize)
 	{
 		this.numIO=0;
@@ -29,8 +47,6 @@ public class Buffer {
 	}
 	public void free() {
 		this.numIO=0;
-		this.bufsize=bufsize;
-		this.blksize=blksize;
 		this.numallblock=bufsize/(blksize+1);
 		this.numfreeblk=this.numallblock;
 		data=new Block[numallblock];
@@ -91,7 +107,7 @@ public class Buffer {
 		this.numIO+=1;
 		return result;
 	}
-	public boolean writeblocktodisk(int blkptr,long addr) {
+	public boolean writeblocktodisk(int blkptr,long addr) throws IOException {
 		addr=addr&0xFFFFFFFF;
 		File file =new File("src/blocks/"+addr+".blk");
 		StringBuffer sb=new StringBuffer();
@@ -102,6 +118,7 @@ public class Buffer {
 		this.data[blkptr].setAvailable();
 		this.numfreeblk+=1;
 		this.numIO+=1;
+		Files.write(sb, file, Charsets.UTF_8);
 		return true;
 		
 	}
