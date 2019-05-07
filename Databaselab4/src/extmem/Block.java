@@ -5,13 +5,10 @@ import java.util.Arrays;
 public class Block {
 	private int size;
 	private byte[] data;
-
-	private int next;
 	private boolean available;
 	public Block(int size,int next) {
 		this.size=size;
-		this.data=new byte[size-4];
-		this.next=next;
+		this.data=new byte[size];
 		this.available=true;
 	}
 	public int getSize() {
@@ -40,18 +37,10 @@ public class Block {
 		builder.append(size);
 		builder.append(", data=");
 		builder.append(Arrays.toString(data));
-		builder.append(", next=");
-		builder.append(next);
 		builder.append(", available=");
 		builder.append(available);
 		builder.append("]");
 		return builder.toString();
-	}
-	public int getNext() {
-		return next;
-	}
-	public void setNext(int next) {
-		this.next = next;
 	}
 	public void setAvailable() {
 		this.available = true;

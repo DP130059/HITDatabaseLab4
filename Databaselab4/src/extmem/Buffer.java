@@ -38,7 +38,7 @@ public class Buffer {
 		this.numIO=0;
 		this.bufsize=bufsize;
 		this.blksize=blksize;
-		this.numallblock=bufsize/(blksize+1);
+		this.numallblock=bufsize/(blksize);
 		this.numfreeblk=this.numallblock;
 		data=new Block[numallblock];
 		for(int i=0;i<numallblock;i++) {
@@ -46,8 +46,7 @@ public class Buffer {
 		}
 	}
 	public void free() {
-		this.numIO=0;
-		this.numallblock=bufsize/(blksize+1);
+		this.numallblock=bufsize/(blksize);
 		this.numfreeblk=this.numallblock;
 		data=new Block[numallblock];
 		for(int i=0;i<numallblock;i++) { 
@@ -70,7 +69,7 @@ public class Buffer {
 	}
 	public void freeBlockinBuffer(int i) {
 		this.numfreeblk+=1;
-		data[i].setAvailable();
+		data[i]=new Block(this.blksize, 0);
 	}
 	public boolean dropblockondisk(long addr) {
 		addr=addr&0xFFFFFFFF;
@@ -120,7 +119,6 @@ public class Buffer {
 		this.numIO+=1;
 		Files.write(sb, file, Charsets.UTF_8);
 		return true;
-		
 	}
 	
 }
