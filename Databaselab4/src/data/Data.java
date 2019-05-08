@@ -1,7 +1,12 @@
 package data;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLNonTransientConnectionException;
 import java.util.Random;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 public class Data {
 	public byte[] getRdata() {
@@ -14,7 +19,12 @@ public class Data {
 			b[i] = new Random().nextInt(1000);
 			sb.append("( " + a[i] + " , " + b[i] + " )\n");
 		}
-		System.out.println(sb.toString());
+		try {
+			Files.write(sb, new File("src/blocks/rdata.txt"), Charsets.UTF_8);
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 		int k = 0;
 		for (int i = 0; i < 112; i++) {
 			byte[] tmpbytes = int2byte(a[i]);
@@ -47,7 +57,12 @@ public class Data {
 			b[i] = new Random().nextInt(1000);
 			sb.append("( " + a[i] + " , " + b[i] + " )\n");
 		}
-		System.out.println(sb.toString());
+		try {
+			Files.write(sb, new File("src/blocks/sdata.txt"), Charsets.UTF_8);
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 		int k = 0;
 		for (int i = 0; i < 112 * 2; i++) {
 			byte[] tmpbytes = int2byte(a[i]);
