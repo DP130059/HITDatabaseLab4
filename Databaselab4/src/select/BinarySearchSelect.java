@@ -970,6 +970,7 @@ public class BinarySearchSelect {
 	public static void main(String[] args) {
 		try {
 			sorts();
+			//sortr();
 			decodeoutput();
 			//selectr(31);
 		} catch (IOException e) {
