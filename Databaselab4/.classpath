@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="E:/软件构造/Lab/MLLab4_1160300613/lib/guava-jdk5-17.0.jar"/>
+	<classpathentry kind="lib" path="lib/guava-jdk5-17.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

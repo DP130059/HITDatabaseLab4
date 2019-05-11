@@ -938,9 +938,9 @@ public class BinarySearchSelect {
 	}
 
 	public static void decodeoutput() throws IOException {
-		int addr = 0x77777777;
+		int addr = 0x22222222;
 		Data data = new Data();
-		for (int i = 0; i < 32; i++) {
+		for (int i = 0; i < 16; i++) {
 			System.out.println((i+1)+".");
 			List<String> singlefile = Files.readLines(new File("src/blocks/" + addr + ".blk"), Charsets.UTF_8);
 			byte[] tmp = new byte[64];
@@ -969,8 +969,8 @@ public class BinarySearchSelect {
 
 	public static void main(String[] args) {
 		try {
-			sorts();
-			//sortr();
+			//sorts();
+			sortr();
 			decodeoutput();
 			//selectr(31);
 		} catch (IOException e) {
